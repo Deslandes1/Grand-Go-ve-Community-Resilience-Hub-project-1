@@ -5,13 +5,12 @@ import os
 import base64
 import re
 import subprocess
-import time
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
-    page_title="Grand Goâve Community Hub | GlobalInternet.py",
+    page_title="Haiti Community Resilience Initiative | GlobalInternet.py",
     layout="wide",
-    page_icon="🌞"
+    page_icon="🇭🇹"
 )
 
 # ---------- STYLING (LIGHT BLUE THEME) ----------
@@ -83,68 +82,104 @@ st.markdown("""
     }
     .contact-box a { color: #4a90d9; text-decoration: none; font-weight: 600; }
     .contact-box a:hover { text-decoration: underline; }
+    .dept-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 10px 0;
+    }
+    .dept-tag {
+        background: rgba(74,144,217,0.15);
+        border: 1px solid #4a90d9;
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-size: 0.8rem;
+        color: #0b2b3a;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- SIDEBAR CONTENT (also used for narration) ----------
-sidebar_text = """
-Grand Goâve Hub – Project Navigator. The sidebar contains the following sections: Overview, The Challenge, Our Solution, Budget, and Get Involved. Grand Goâve, Haiti – population about ten thousand, sunny days over three hundred per year, and the community is ready for impact.
-"""
+# ---------- SIDEBAR ----------
+with st.sidebar:
+    st.image("https://flagcdn.com/w320/ht.png", width=60)
+    st.markdown("## 🇭🇹 Haiti Initiative")
+    st.markdown("---")
+    st.markdown("### Project Navigator")
+    st.markdown("1. Overview")
+    st.markdown("2. The Challenge")
+    st.markdown("3. Our Solution")
+    st.markdown("4. Budget")
+    st.markdown("5. Get Involved")
+    st.markdown("---")
+    st.markdown("### 📍 Departments Targeted")
+    st.markdown('<div class="dept-list">', unsafe_allow_html=True)
+    departments = [
+        "Artibonite", "Centre", "Grand'Anse", "Nippes", "Nord",
+        "Nord-Est", "Nord-Ouest", "Ouest", "Sud", "Sud-Est"
+    ]
+    for dept in departments:
+        st.markdown(f'<span class="dept-tag">{dept}</span>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("---")
+    st.markdown("### 🇭🇹 Haiti at a Glance")
+    st.markdown("Population: ~11 million")
+    st.markdown("Sunny days: 300+/year")
+    st.markdown("Ready for impact across all departments")
 
 # ---------- FULL NARRATION SCRIPTS ----------
 ENGLISH_SCRIPT = """
-Grand Goâve Community Resilience Hub. Solar-Powered, Water-Secure, Food-Sustainable, Digitally-Connected.
+Haiti Community Resilience Initiative. Solar-Powered, Water-Secure, Food-Sustainable, Digitally-Connected – for all 10 departments of Haiti.
 
-Project Overview. Grand Goâve is a peaceful coastal town in southern Haiti, rich in sunshine and fertile land. Yet its people lack three essentials: reliable electricity, clean water, and internet access. The Community Resilience Hub is a replicable model that addresses these challenges through solar power, sustainable agriculture, and digital connectivity.
+Project Overview. Haiti is a country of immense potential, blessed with abundant sunshine, fertile land, and a resilient population. Yet millions of Haitians lack reliable electricity, clean water, and internet access. The Haiti Community Resilience Initiative is a replicable model designed to be implemented in every department of the country – from Artibonite to Sud-Est.
 
-The key objectives are: provide reliable solar electricity for homes and community spaces. Deliver clean drinking water through solar-powered purification. Train families in sustainable gardening on their own land. Connect the community to the global digital economy. Create a space for education, entrepreneurship, and innovation.
+The key objectives are: provide reliable solar electricity for homes and community spaces. Deliver clean drinking water through solar-powered purification. Train families in sustainable gardening on their own land. Connect communities to the global digital economy. Create spaces for education, entrepreneurship, and innovation.
 
-The Challenge. Currently, there is no grid access, and generators are expensive, limiting productivity and refrigeration. Water sources are unsafe, with latrines still in use, causing health risks. Internet access is unreliable, preventing digital learning and remote work. Food insecurity is high due to limited access to fresh produce.
+The Challenge. Across all departments, the majority of rural areas have no access to the electrical grid, and generators are prohibitively expensive. Unsafe water sources and latrines cause widespread health problems. Internet access is unreliable, preventing digital learning and remote work. Food insecurity is chronic due to limited access to fresh produce.
 
 Our Solution in Three Phases. Phase One: Solar Microgrid. This includes a five-kilowatt solar array, battery storage, a community well pump, water purification system, and power for a computer lab. Phase Two: Community Gardening. This provides training programs, seeds, tools, composting systems, rainwater harvesting, and market access support. Phase Three: Digital Hub. This includes ten computers, satellite internet, coding classes, remote work training, and access to the global marketplace.
 
-The affordable budget totals seventy-five thousand US dollars. Breakdown: solar panels and batteries, eighteen thousand. Water well and purification, twelve thousand. Garden tools and seeds, eight thousand. Computers and internet equipment, fifteen thousand. Training and education programs, ten thousand. Transport and logistics, six thousand. Project management for twelve months, six thousand. Total investment: seventy-five thousand US dollars.
+The affordable budget totals seventy-five thousand US dollars per hub. Breakdown: solar panels and batteries, eighteen thousand. Water well and purification, twelve thousand. Garden tools and seeds, eight thousand. Computers and internet equipment, fifteen thousand. Training and education programs, ten thousand. Transport and logistics, six thousand. Project management for twelve months, six thousand. Total investment: seventy-five thousand US dollars per community hub.
 
-Get Involved. We invite sponsors, investors, and partners to join us in transforming Grand Goâve. Your contribution will bring light to families, provide clean water, grow food security, connect a community to the world, and educate the next generation. We are open to partnerships at any level. Whether you can provide funding, equipment, expertise, or networking, your support matters.
+Get Involved. We invite sponsors, investors, and partners to join us in transforming Haiti, one community at a time. Your contribution will bring light to families, provide clean water, grow food security, connect communities to the world, and educate the next generation. We are open to partnerships at any level. Whether you can provide funding, equipment, expertise, or networking, your support matters.
 
 Contact Information. Gesner Deslandes, Engineer-in-Chief at GlobalInternet.py. Email: deslandes78@gmail.com. Phone: (509) 4738-5663. Website: globalinternetsitepy.streamlit.app.
 
-Be the Light for Grand Goâve. Your sponsorship can transform a community. Contact us today to start the conversation.
+Be the Light for Haiti. Your sponsorship can transform communities across all 10 departments. Contact us today to start the conversation.
 
 Built by Gesner Deslandes, Engineer-in-Chief at GlobalInternet.py. Solar-powered, Community-driven, Future-focused.
 
-Now, let's look at the sidebar. The sidebar contains the project navigator with sections: Overview, The Challenge, Our Solution, Budget, and Get Involved. It also shows that Grand Goâve, Haiti, has a population of about ten thousand, over three hundred sunny days per year, and is ready for impact.
+Now, let's look at the sidebar. The sidebar lists all ten departments of Haiti where this initiative can be implemented: Artibonite, Centre, Grand'Anse, Nippes, Nord, Nord-Est, Nord-Ouest, Ouest, Sud, and Sud-Est. It also shows that Haiti has a population of about 11 million, over 300 sunny days per year, and is ready for impact across all departments.
 
-Conclusion. How is this project possible? It is possible because we combine proven technologies with local knowledge and community participation. The abundant sunshine provides free energy. The fertile land can grow food. The people have the will and the skills to make it work. With the right partnership and modest investment, we can turn this vision into reality. We invite all sponsors to visit the live demo of this project at the following link: https://grand-goave-community-hub.streamlit.app to see the full proposal and interactive budget breakdown. Together, we can build resilience, dignity, and hope. Thank you for your support.
+Conclusion. How is this project possible? It is possible because we combine proven technologies with local knowledge and community participation. The abundant sunshine provides free energy. The fertile land can grow food. The people have the will and the skills to make it work. With the right partnership and modest investment, we can turn this vision into reality. We invite all sponsors to visit the live demo of this project at the following link: https://grand-goave-community-hub.streamlit.app to see the full proposal and interactive budget breakdown. Together, we can build resilience, dignity, and hope for all of Haiti. Thank you for your support.
 """
 
 FRENCH_SCRIPT = """
-Projet Hub de Résilience Communautaire de Grand Goâve. Solaire, Sécurité d'eau, Alimentation durable, Connecté numériquement.
+Initiative de Résilience Communautaire d'Haïti. Solaire, Sécurité d'eau, Alimentation durable, Connecté numériquement – pour les 10 départements d'Haïti.
 
-Aperçu du projet. Grand Goâve est une ville côtière paisible du sud d'Haïti, riche en soleil et en terres fertiles. Pourtant, ses habitants manquent de trois éléments essentiels : électricité fiable, eau potable et accès à Internet. Le Hub de Résilience Communautaire est un modèle reproductible qui relève ces défis grâce à l'énergie solaire, l'agriculture durable et la connectivité numérique.
+Aperçu du projet. Haïti est un pays d'un immense potentiel, béni par un ensoleillement abondant, des terres fertiles et une population résiliente. Pourtant, des millions d'Haïtiens manquent d'électricité fiable, d'eau potable et d'accès à Internet. L'Initiative de Résilience Communautaire d'Haïti est un modèle reproductible conçu pour être mis en œuvre dans chaque département du pays – d'Artibonite à Sud-Est.
 
-Les objectifs clés sont : fournir de l'électricité solaire fiable pour les maisons et les espaces communautaires. Distribuer de l'eau potable via une purification solaire. Former les familles au jardinage durable sur leurs propres terres. Connecter la communauté à l'économie numérique mondiale. Créer un espace pour l'éducation, l'entrepreneuriat et l'innovation.
+Les objectifs clés sont : fournir de l'électricité solaire fiable pour les maisons et les espaces communautaires. Distribuer de l'eau potable via une purification solaire. Former les familles au jardinage durable sur leurs propres terres. Connecter les communautés à l'économie numérique mondiale. Créer des espaces pour l'éducation, l'entrepreneuriat et l'innovation.
 
-Le défi. Actuellement, il n'y a pas d'accès au réseau électrique, les générateurs sont chers, limitant la productivité et la réfrigération. Les sources d'eau sont dangereuses, avec des latrines encore utilisées, causant des risques sanitaires. L'accès à Internet est peu fiable, empêchant l'apprentissage numérique et le travail à distance. L'insécurité alimentaire est élevée en raison d'un accès limité aux produits frais.
+Le défi. Dans tous les départements, la majorité des zones rurales n'ont pas accès au réseau électrique, et les générateurs sont prohibitifs. Les sources d'eau sont dangereuses, avec des latrines encore utilisées, causant des problèmes de santé généralisés. L'accès à Internet est peu fiable, empêchant l'apprentissage numérique et le travail à distance. L'insécurité alimentaire est chronique en raison d'un accès limité aux produits frais.
 
 Notre solution en trois phases. Phase un : micro-réseau solaire. Cela comprend un panneau solaire de cinq kilowatts, des batteries, une pompe de puits communautaire, un système de purification d'eau et l'alimentation d'un laboratoire informatique. Phase deux : jardinage communautaire. Cela offre des programmes de formation, des semences, des outils, des systèmes de compostage, la récupération d'eau de pluie et un soutien à l'accès au marché. Phase trois : hub numérique. Cela comprend dix ordinateurs, un accès Internet par satellite, des cours de codage, une formation au travail à distance et un accès au marché mondial.
 
-Le budget abordable totalise soixante-quinze mille dollars américains. Détails : panneaux solaires et batteries, dix-huit mille. Puits et purification d'eau, douze mille. Outils et semences de jardin, huit mille. Ordinateurs et équipements Internet, quinze mille. Formation et programmes éducatifs, dix mille. Transport et logistique, six mille. Gestion de projet pendant douze mois, six mille. Investissement total : soixante-quinze mille dollars américains.
+Le budget abordable totalise soixante-quinze mille dollars américains par hub. Détails : panneaux solaires et batteries, dix-huit mille. Puits et purification d'eau, douze mille. Outils et semences de jardin, huit mille. Ordinateurs et équipements Internet, quinze mille. Formation et programmes éducatifs, dix mille. Transport et logistique, six mille. Gestion de projet pendant douze mois, six mille. Investissement total : soixante-quinze mille dollars américains par hub communautaire.
 
-Participez. Nous invitons les sponsors, investisseurs et partenaires à se joindre à nous pour transformer Grand Goâve. Votre contribution apportera la lumière aux familles, fournira de l'eau potable, améliorera la sécurité alimentaire, connectera la communauté au monde et éduquera la prochaine génération. Nous sommes ouverts aux partenariats à tous les niveaux. Que vous puissiez fournir du financement, de l'équipement, de l'expertise ou du réseautage, votre soutien est important.
+Participez. Nous invitons les sponsors, investisseurs et partenaires à se joindre à nous pour transformer Haïti, une communauté à la fois. Votre contribution apportera la lumière aux familles, fournira de l'eau potable, améliorera la sécurité alimentaire, connectera les communautés au monde et éduquera la prochaine génération. Nous sommes ouverts aux partenariats à tous les niveaux. Que vous puissiez fournir du financement, de l'équipement, de l'expertise ou du réseautage, votre soutien est important.
 
 Coordonnées. Gesner Deslandes, ingénieur en chef chez GlobalInternet.py. Email : deslandes78@gmail.com. Téléphone : (509) 4738-5663. Site web : globalinternetsitepy.streamlit.app.
 
-Soyez la lumière pour Grand Goâve. Votre parrainage peut transformer une communauté. Contactez-nous dès aujourd'hui pour lancer la conversation.
+Soyez la lumière pour Haïti. Votre parrainage peut transformer des communautés dans les 10 départements. Contactez-nous dès aujourd'hui pour lancer la conversation.
 
 Construit par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py. Solaire, communautaire, tourné vers l'avenir.
 
-Parlons maintenant de la barre latérale. La barre latérale contient le navigateur de projet avec les sections : Aperçu, Le défi, Notre solution, Budget et Participez. Elle indique également que Grand Goâve, Haïti, a une population d'environ dix mille habitants, plus de trois cents jours d'ensoleillement par an, et est prête pour l'impact.
+Parlons maintenant de la barre latérale. La barre latérale liste les dix départements d'Haïti où cette initiative peut être mise en œuvre : Artibonite, Centre, Grand'Anse, Nippes, Nord, Nord-Est, Nord-Ouest, Ouest, Sud et Sud-Est. Elle indique également qu'Haïti a une population d'environ 11 millions d'habitants, plus de 300 jours d'ensoleillement par an, et est prête pour un impact dans tous les départements.
 
-Conclusion. Comment ce projet est-il possible ? Il est possible parce que nous combinons des technologies éprouvées avec les connaissances locales et la participation communautaire. Le soleil abondant fournit de l'énergie gratuite. La terre fertile peut produire de la nourriture. Les gens ont la volonté et les compétences pour le faire fonctionner. Avec le bon partenariat et un investissement modeste, nous pouvons transformer cette vision en réalité. Nous invitons tous les sponsors à visiter la démo en direct de ce projet à l'adresse suivante : https://grand-goave-community-hub.streamlit.app pour voir la proposition complète et le budget interactif. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir. Merci pour votre soutien.
+Conclusion. Comment ce projet est-il possible ? Il est possible parce que nous combinons des technologies éprouvées avec les connaissances locales et la participation communautaire. Le soleil abondant fournit de l'énergie gratuite. La terre fertile peut produire de la nourriture. Les gens ont la volonté et les compétences pour le faire fonctionner. Avec le bon partenariat et un investissement modeste, nous pouvons transformer cette vision en réalité. Nous invitons tous les sponsors à visiter la démo en direct de ce projet à l'adresse suivante : https://grand-goave-community-hub.streamlit.app pour voir la proposition complète et le budget interactif. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir pour toute la nation haïtienne. Merci pour votre soutien.
 """
 
-# ---------- CHUNKING FUNCTION ----------
+# ---------- CHUNKING & AUDIO FUNCTIONS ----------
 def split_text_into_chunks(text, max_chars=1500):
     sentences = re.split(r'(?<=[。！？.!?])', text)
     chunks = []
@@ -158,7 +193,6 @@ def split_text_into_chunks(text, max_chars=1500):
             current = sent
     if current:
         chunks.append(current.strip())
-    # If a single chunk is still too long, split by words
     final_chunks = []
     for chunk in chunks:
         if len(chunk) <= max_chars:
@@ -180,7 +214,7 @@ def split_text_into_chunks(text, max_chars=1500):
 async def generate_audio(text, voice):
     try:
         import edge_tts
-        # First, try to generate the entire text at once
+        # Try full text first
         try:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
                 output_path = tmp.name
@@ -189,9 +223,8 @@ async def generate_audio(text, voice):
             if os.path.getsize(output_path) > 0:
                 return output_path
         except Exception as e:
-            st.warning(f"Full text generation failed ({e}). Trying chunked fallback...")
+            st.warning(f"Full text generation failed: {e}. Trying chunked fallback...")
 
-        # If that fails, split into chunks and concatenate using ffmpeg (if available)
         chunks = split_text_into_chunks(text, 1000)
         temp_files = []
         for i, chunk in enumerate(chunks):
@@ -207,7 +240,7 @@ async def generate_audio(text, voice):
         if not temp_files:
             return None
 
-        # Check if ffmpeg is available
+        # Check ffmpeg availability
         ffmpeg_available = False
         try:
             subprocess.run(["ffmpeg", "-version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
@@ -216,7 +249,6 @@ async def generate_audio(text, voice):
             ffmpeg_available = False
 
         if ffmpeg_available and len(temp_files) > 1:
-            # Concatenate with ffmpeg
             concat_file = "concat_list.txt"
             with open(concat_file, "w") as f:
                 for tf in temp_files:
@@ -234,22 +266,15 @@ async def generate_audio(text, voice):
                 st.error(f"FFmpeg concatenation failed: {e}. Playing first chunk only.")
                 return temp_files[0] if temp_files else None
         else:
-            # If only one chunk or ffmpeg not available, return the first chunk (or we could play sequentially)
-            if len(temp_files) == 1:
-                return temp_files[0]
-            else:
-                # Return a list of files to play sequentially (we'll handle in play_audio)
-                return temp_files
+            return temp_files[0] if temp_files else None
     except Exception as e:
         st.error(f"Audio generation error: {e}")
         return None
 
 def play_audio(audio_files):
     if isinstance(audio_files, list):
-        # Play sequentially using HTML5 audio with JavaScript
         if not audio_files:
             return
-        # Build HTML with multiple audio elements and a script to play them in sequence
         html = """
         <div id="audio-container"></div>
         <script>
@@ -257,7 +282,7 @@ def play_audio(audio_files):
             const container = document.getElementById('audio-container');
             const audioSources = [];
         """
-        for i, path in enumerate(audio_files):
+        for path in audio_files:
             if os.path.exists(path):
                 with open(path, "rb") as f:
                     audio_bytes = f.read()
@@ -283,10 +308,7 @@ def play_audio(audio_files):
         </script>
         """
         st.markdown(html, unsafe_allow_html=True)
-        # Clean up files after playing? We'll clean up later.
-        # For now, we leave them; they will be deleted when script ends.
     else:
-        # Single file
         if audio_files and os.path.exists(audio_files):
             with open(audio_files, "rb") as f:
                 audio_bytes = f.read()
@@ -294,33 +316,15 @@ def play_audio(audio_files):
                 st.markdown(f'<audio controls src="data:audio/mp3;base64,{b64}" autoplay style="width:100%;"></audio>', unsafe_allow_html=True)
             os.unlink(audio_files)
 
-# ---------- SIDEBAR ----------
-with st.sidebar:
-    st.image("https://flagcdn.com/w320/ht.png", width=60)
-    st.markdown("## 🌞 Grand Goâve Hub")
-    st.markdown("---")
-    st.markdown("### Project Navigator")
-    st.markdown("1. Overview")
-    st.markdown("2. The Challenge")
-    st.markdown("3. Our Solution")
-    st.markdown("4. Budget")
-    st.markdown("5. Get Involved")
-    st.markdown("---")
-    st.markdown("### 🇭🇹 Grand Goâve, Haiti")
-    st.markdown("Population: ~10,000")
-    st.markdown("Sunny days: 300+/year")
-    st.markdown("Status: Ready for impact")
-
 # ---------- MAIN CONTENT ----------
-# Title
 st.markdown("""
 <div class="main-title">
-    <h1>🌞 Grand Goâve Community Resilience Hub</h1>
-    <p>Solar-Powered | Water-Secure | Food-Sustainable | Digitally-Connected</p>
+    <h1>🇭🇹 Haiti Community Resilience Initiative</h1>
+    <p>Solar-Powered · Water-Secure · Food-Sustainable · Digitally-Connected · All 10 Departments</p>
 </div>
 """, unsafe_allow_html=True)
 
-# Audio player section
+# Audio buttons
 col_audio1, col_audio2 = st.columns(2)
 with col_audio1:
     if st.button("🔊 Listen in English", key="en_btn", use_container_width=False):
@@ -344,14 +348,14 @@ with col_audio2:
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
 st.markdown("### 🎯 Project Overview")
 st.markdown("""
-**Grand Goâve** is a peaceful coastal town in southern Haiti, rich in sunshine and fertile land. Yet its people lack three essentials: reliable electricity, clean water, and internet access. The Community Resilience Hub is a replicable model that addresses these challenges through solar power, sustainable agriculture, and digital connectivity.
+**Haiti** is a country of immense potential, blessed with abundant sunshine, fertile land, and a resilient population. Yet millions of Haitians lack reliable electricity, clean water, and internet access. The **Haiti Community Resilience Initiative** is a replicable model designed to be implemented in **all 10 departments** of the country – from Artibonite to Sud-Est.
 
 **Key Objectives:**
 - ⚡ Provide reliable solar electricity for homes and community spaces
 - 💧 Deliver clean drinking water through solar-powered purification
 - 🌱 Train families in sustainable gardening on their own land
-- 🌐 Connect the community to the global digital economy
-- 📚 Create a space for education, entrepreneurship, and innovation
+- 🌐 Connect communities to the global digital economy
+- 📚 Create spaces for education, entrepreneurship, and innovation
 """)
 st.markdown('</div>', unsafe_allow_html=True)
 
@@ -361,8 +365,8 @@ st.markdown("### ⚠️ The Challenge")
 st.markdown("""
 | Issue | Current Reality | Impact |
 |-------|-----------------|--------|
-| Electricity | No grid access; expensive generators | Limited productivity, no refrigeration, dark evenings |
-| Water | Latrines used; no purification | Health risks, waterborne diseases |
+| Electricity | No grid access in rural areas; expensive generators | Limited productivity, no refrigeration, dark evenings |
+| Water | Unsafe sources, latrines still in use | Health risks, waterborne diseases |
 | Internet | Unreliable mobile hotspots | No digital learning, no remote work |
 | Food | Limited access to fresh produce | Poor nutrition, food insecurity |
 """)
@@ -400,7 +404,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- BUDGET ----------
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
-st.markdown("### 💰 Affordable Budget")
+st.markdown("### 💰 Affordable Budget *per community hub*")
 st.markdown("*Total investment: $75,000 USD*")
 
 budget_items = [
@@ -423,11 +427,11 @@ st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
 st.markdown("### 🤝 Get Involved")
 st.markdown("""
-We invite sponsors, investors, and partners to join us in transforming Grand Goâve. Your contribution will:
+We invite sponsors, investors, and partners to join us in transforming Haiti, one community at a time. Your contribution will:
 - 💡 Bring light to families
 - 💧 Provide clean water
 - 🌱 Grow food security
-- 🌐 Connect a community to the world
+- 🌐 Connect communities to the world
 - 👩‍🎓 Educate the next generation
 
 **We are open to partnerships at any level.** Whether you can provide funding, equipment, expertise, or networking, your support matters.
@@ -446,11 +450,11 @@ Engineer-in-Chief at GlobalInternet.py
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# ---------- SPONSOR CALL TO ACTION ----------
+# ---------- CALL TO ACTION ----------
 st.markdown("""
 <div style="background: linear-gradient(135deg, #4a90d9, #7bb3e8); border-radius: 16px; padding: 2rem; text-align: center; color: white; margin-top: 1rem;">
-    <h2 style="margin: 0; color: white;">🌞 Be the Light for Grand Goâve</h2>
-    <p style="font-size: 1.1rem; opacity: 0.95;">Your sponsorship can transform a community. Contact us today to start the conversation.</p>
+    <h2 style="margin: 0; color: white;">🇭🇹 Be the Light for Haiti</h2>
+    <p style="font-size: 1.1rem; opacity: 0.95;">Your sponsorship can transform communities across all 10 departments. Contact us today to start the conversation.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -458,6 +462,6 @@ st.markdown("""
 st.markdown("""
 <div class="footer">
     Built by <strong>Gesner Deslandes</strong>, Engineer‑in‑Chief at GlobalInternet.py<br>
-    Solar-powered • Community-driven • Future-focused
+    Solar-powered • Community-driven • Future-focused • Nation-wide
 </div>
 """, unsafe_allow_html=True)
