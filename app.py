@@ -99,19 +99,158 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ---------- UI DICTIONARY (ALL TEXT IN ENGLISH & FRENCH) ----------
+UI = {
+    "English": {
+        "language_label": "🌐 Language",
+        "app_title": "🇭🇹 Haiti Community Resilience Initiative",
+        "app_subtitle": "Solar-Powered · Water-Secure · Food-Sustainable · Digitally-Connected · All 10 Departments",
+        "sidebar_title": "🇭🇹 Haiti Initiative",
+        "nav_overview": "1. Overview",
+        "nav_challenge": "2. The Challenge",
+        "nav_solution": "3. Our Solution",
+        "nav_budget": "4. Budget",
+        "nav_involved": "5. Get Involved",
+        "departments_label": "📍 Departments Targeted",
+        "at_a_glance": "🇭🇹 Haiti at a Glance",
+        "population": "Population: ~11 million",
+        "sunny_days": "Sunny days: 300+/year",
+        "status": "Ready for impact across all departments",
+        "overview_title": "🎯 Project Overview",
+        "overview_text": "**Haiti** is a country of immense potential, blessed with abundant sunshine, fertile land, and a resilient population. Yet millions of Haitians lack reliable electricity, clean water, and internet access. The **Haiti Community Resilience Initiative** is a replicable model designed to be implemented in **all 10 departments** of the country – from Artibonite to Sud-Est.",
+        "objectives": "**Key Objectives:**",
+        "obj1": "⚡ Provide reliable solar electricity for homes and community spaces",
+        "obj2": "💧 Deliver clean drinking water through solar-powered purification",
+        "obj3": "🌱 Train families in sustainable gardening on their own land",
+        "obj4": "🌐 Connect communities to the global digital economy",
+        "obj5": "📚 Create spaces for education, entrepreneurship, and innovation",
+        "challenge_title": "⚠️ The Challenge",
+        "challenge_table": "| Issue | Current Reality | Impact |\n|-------|-----------------|--------|\n| Electricity | No grid access in rural areas; expensive generators | Limited productivity, no refrigeration, dark evenings |\n| Water | Unsafe sources, latrines still in use | Health risks, waterborne diseases |\n| Internet | Unreliable mobile hotspots | No digital learning, no remote work |\n| Food | Limited access to fresh produce | Poor nutrition, food insecurity |",
+        "solution_title": "💡 Our Solution: 3 Phases",
+        "phase1_title": "⚡ Phase 1",
+        "phase1_sub": "Solar Microgrid",
+        "phase1_items": "- 5kW solar array\n- Battery storage\n- Community well pump\n- Water purification system\n- Computer lab power",
+        "phase2_title": "🌱 Phase 2",
+        "phase2_sub": "Community Gardening",
+        "phase2_items": "- Training program\n- Seeds & tools\n- Composting system\n- Rainwater harvesting\n- Market access support",
+        "phase3_title": "🌐 Phase 3",
+        "phase3_sub": "Digital Hub",
+        "phase3_items": "- 10 computers\n- Satellite internet\n- Coding classes\n- Remote work training\n- Global marketplace",
+        "budget_title": "💰 Affordable Budget *per community hub*",
+        "budget_total": "Total investment: $75,000 USD",
+        "budget_items": [
+            ("Solar panels & batteries", "$18,000"),
+            ("Water well & purification", "$12,000"),
+            ("Garden tools & seeds", "$8,000"),
+            ("Computers & internet equipment", "$15,000"),
+            ("Training & education programs", "$10,000"),
+            ("Transport & logistics", "$6,000"),
+            ("Project management (12 months)", "$6,000"),
+        ],
+        "budget_final": "Total: $75,000 USD",
+        "involved_title": "🤝 Get Involved",
+        "involved_text": "We invite sponsors, investors, and partners to join us in transforming Haiti, one community at a time. Your contribution will:",
+        "involved_items": "- 💡 Bring light to families\n- 💧 Provide clean water\n- 🌱 Grow food security\n- 🌐 Connect communities to the world\n- 👩‍🎓 Educate the next generation",
+        "involved_note": "**We are open to partnerships at any level.** Whether you can provide funding, equipment, expertise, or networking, your support matters.",
+        "contact_title": "📞 Contact Information",
+        "contact_name": "**Gesner Deslandes**  \nEngineer-in-Chief at GlobalInternet.py",
+        "contact_email": "📧 **Email:** [deslandes78@gmail.com](mailto:deslandes78@gmail.com)",
+        "contact_phone": "📱 **Phone:** (509) 4738-5663 (Moncash / Prisme Transfer)",
+        "contact_website": "🌐 **Website:** [GlobalInternet.py](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app/)",
+        "cta_title": "🇭🇹 Be the Light for Haiti",
+        "cta_text": "Your sponsorship can transform communities across all 10 departments. Contact us today to start the conversation.",
+        "footer_text": "Built by **Gesner Deslandes**, Engineer‑in‑Chief at GlobalInternet.py  \nSolar-powered • Community-driven • Future-focused • Nation-wide",
+        "audio_note": "ℹ️ The AI audio in both languages reads the full page content – including the sidebar and all sections.",
+        "btn_en": "🔊 Listen in English",
+        "btn_fr": "🔊 Écouter en français",
+        "demo_link": "Live Demo: https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/"
+    },
+    "French": {
+        "language_label": "🌐 Langue",
+        "app_title": "🇭🇹 Initiative de Résilience Communautaire d'Haïti",
+        "app_subtitle": "Solaire · Sécurité d'eau · Alimentation durable · Connecté numériquement · 10 départements",
+        "sidebar_title": "🇭🇹 Initiative Haïti",
+        "nav_overview": "1. Aperçu",
+        "nav_challenge": "2. Le défi",
+        "nav_solution": "3. Notre solution",
+        "nav_budget": "4. Budget",
+        "nav_involved": "5. Participez",
+        "departments_label": "📍 Départements ciblés",
+        "at_a_glance": "🇭🇹 Haïti en bref",
+        "population": "Population : ~11 millions",
+        "sunny_days": "Jours d'ensoleillement : 300+/an",
+        "status": "Prêt pour un impact dans tous les départements",
+        "overview_title": "🎯 Aperçu du projet",
+        "overview_text": "**Haïti** est un pays d'un immense potentiel, béni par un ensoleillement abondant, des terres fertiles et une population résiliente. Pourtant, des millions d'Haïtiens manquent d'électricité fiable, d'eau potable et d'accès à Internet. L'**Initiative de Résilience Communautaire d'Haïti** est un modèle reproductible conçu pour être mis en œuvre dans les **10 départements** du pays – d'Artibonite à Sud-Est.",
+        "objectives": "**Objectifs clés :**",
+        "obj1": "⚡ Fournir de l'électricité solaire fiable pour les maisons et les espaces communautaires",
+        "obj2": "💧 Distribuer de l'eau potable via une purification solaire",
+        "obj3": "🌱 Former les familles au jardinage durable sur leurs propres terres",
+        "obj4": "🌐 Connecter les communautés à l'économie numérique mondiale",
+        "obj5": "📚 Créer des espaces pour l'éducation, l'entrepreneuriat et l'innovation",
+        "challenge_title": "⚠️ Le défi",
+        "challenge_table": "| Problème | Réalité actuelle | Impact |\n|----------|------------------|--------|\n| Électricité | Pas d'accès au réseau en zone rurale ; générateurs chers | Productivité limitée, pas de réfrigération, soirées sombres |\n| Eau | Sources dangereuses, latrines encore utilisées | Risques sanitaires, maladies hydriques |\n| Internet | Points d'accès mobiles peu fiables | Pas d'apprentissage numérique, pas de travail à distance |\n| Alimentation | Accès limité aux produits frais | Mauvaise nutrition, insécurité alimentaire |",
+        "solution_title": "💡 Notre solution en 3 phases",
+        "phase1_title": "⚡ Phase 1",
+        "phase1_sub": "Micro-réseau solaire",
+        "phase1_items": "- Panneau solaire 5kW\n- Batteries de stockage\n- Pompe de puits communautaire\n- Système de purification d'eau\n- Alimentation du laboratoire informatique",
+        "phase2_title": "🌱 Phase 2",
+        "phase2_sub": "Jardinage communautaire",
+        "phase2_items": "- Programme de formation\n- Semences et outils\n- Système de compostage\n- Récupération d'eau de pluie\n- Soutien à l'accès au marché",
+        "phase3_title": "🌐 Phase 3",
+        "phase3_sub": "Hub numérique",
+        "phase3_items": "- 10 ordinateurs\n- Internet par satellite\n- Cours de codage\n- Formation au travail à distance\n- Accès au marché mondial",
+        "budget_title": "💰 Budget abordable *par hub communautaire*",
+        "budget_total": "Investissement total : 75 000 USD",
+        "budget_items": [
+            ("Panneaux solaires et batteries", "18 000 $"),
+            ("Puits et purification d'eau", "12 000 $"),
+            ("Outils et semences de jardin", "8 000 $"),
+            ("Ordinateurs et équipements Internet", "15 000 $"),
+            ("Formation et programmes éducatifs", "10 000 $"),
+            ("Transport et logistique", "6 000 $"),
+            ("Gestion de projet (12 mois)", "6 000 $"),
+        ],
+        "budget_final": "Total : 75 000 USD",
+        "involved_title": "🤝 Participez",
+        "involved_text": "Nous invitons les sponsors, investisseurs et partenaires à se joindre à nous pour transformer Haïti, une communauté à la fois. Votre contribution :",
+        "involved_items": "- 💡 Apportera la lumière aux familles\n- 💧 Fournira de l'eau potable\n- 🌱 Améliorera la sécurité alimentaire\n- 🌐 Connectera les communautés au monde\n- 👩‍🎓 Éduquera la prochaine génération",
+        "involved_note": "**Nous sommes ouverts aux partenariats à tous les niveaux.** Que vous puissiez fournir du financement, de l'équipement, de l'expertise ou du réseautage, votre soutien est important.",
+        "contact_title": "📞 Coordonnées",
+        "contact_name": "**Gesner Deslandes**  \nIngénieur en chef chez GlobalInternet.py",
+        "contact_email": "📧 **Email :** [deslandes78@gmail.com](mailto:deslandes78@gmail.com)",
+        "contact_phone": "📱 **Téléphone :** (509) 4738-5663 (Moncash / Prisme Transfer)",
+        "contact_website": "🌐 **Site web :** [GlobalInternet.py](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app/)",
+        "cta_title": "🇭🇹 Soyez la lumière pour Haïti",
+        "cta_text": "Votre parrainage peut transformer des communautés dans les 10 départements. Contactez-nous dès aujourd'hui pour lancer la conversation.",
+        "footer_text": "Construit par **Gesner Deslandes**, ingénieur en chef chez GlobalInternet.py  \nSolaire · Communautaire · Tourné vers l'avenir · National",
+        "audio_note": "ℹ️ L'audio IA dans les deux langues lit tout le contenu de la page – y compris la barre latérale et toutes les sections.",
+        "btn_en": "🔊 Listen in English",
+        "btn_fr": "🔊 Écouter en français",
+        "demo_link": "Démo en direct : https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/"
+    }
+}
+
+# ---------- SESSION STATE ----------
+if "lang" not in st.session_state:
+    st.session_state.lang = "English"
+
 # ---------- SIDEBAR ----------
+lang = st.session_state.lang
+ui = UI[lang]
+
 with st.sidebar:
     st.image("https://flagcdn.com/w320/ht.png", width=60)
-    st.markdown("## 🇭🇹 Haiti Initiative")
+    st.markdown(f"## {ui['sidebar_title']}")
     st.markdown("---")
     st.markdown("### Project Navigator")
-    st.markdown("1. Overview")
-    st.markdown("2. The Challenge")
-    st.markdown("3. Our Solution")
-    st.markdown("4. Budget")
-    st.markdown("5. Get Involved")
+    st.markdown(ui['nav_overview'])
+    st.markdown(ui['nav_challenge'])
+    st.markdown(ui['nav_solution'])
+    st.markdown(ui['nav_budget'])
+    st.markdown(ui['nav_involved'])
     st.markdown("---")
-    st.markdown("### 📍 Departments Targeted")
+    st.markdown(f"### {ui['departments_label']}")
     st.markdown('<div class="dept-list">', unsafe_allow_html=True)
     departments = [
         "Artibonite", "Centre", "Grand'Anse", "Nippes", "Nord",
@@ -121,13 +260,22 @@ with st.sidebar:
         st.markdown(f'<span class="dept-tag">{dept}</span>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown("---")
-    st.markdown("### 🇭🇹 Haiti at a Glance")
-    st.markdown("Population: ~11 million")
-    st.markdown("Sunny days: 300+/year")
-    st.markdown("Ready for impact across all departments")
+    st.markdown(f"### {ui['at_a_glance']}")
+    st.markdown(ui['population'])
+    st.markdown(ui['sunny_days'])
+    st.markdown(ui['status'])
+    st.markdown("---")
+    lang_choice = st.selectbox(
+        ui['language_label'],
+        options=["English", "French"],
+        index=0 if lang == "English" else 1,
+        key="lang_select"
+    )
+    if lang_choice != st.session_state.lang:
+        st.session_state.lang = lang_choice
+        st.rerun()
 
-# ---------- FULL NARRATION SCRIPTS ----------
-# Both scripts now cover the entire page content, including the sidebar, in full detail.
+# ---------- NARRATION SCRIPTS ----------
 ENGLISH_SCRIPT = """
 Haiti Community Resilience Initiative. Solar-Powered, Water-Secure, Food-Sustainable, Digitally-Connected – for all 10 departments of Haiti.
 
@@ -180,7 +328,7 @@ Parlons maintenant de la barre latérale. La barre latérale contient le navigat
 Conclusion. Comment ce projet est-il possible ? Il est possible parce que nous combinons des technologies éprouvées avec les connaissances locales et la participation communautaire. Le soleil abondant fournit de l'énergie gratuite. La terre fertile peut produire de la nourriture. Les gens ont la volonté et les compétences pour le faire fonctionner. Avec le bon partenariat et un investissement modeste, nous pouvons transformer cette vision en réalité. Nous invitons tous les sponsors à visiter la démo en direct de ce projet à l'adresse suivante : https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/ pour voir la proposition complète et le budget interactif. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir pour toute la nation haïtienne. Merci pour votre soutien.
 """
 
-# ---------- CHUNKING & AUDIO FUNCTIONS ----------
+# ---------- AUDIO FUNCTIONS ----------
 def split_text_into_chunks(text, max_chars=1500):
     sentences = re.split(r'(?<=[。！？.!?])', text)
     chunks = []
@@ -215,7 +363,6 @@ def split_text_into_chunks(text, max_chars=1500):
 async def generate_audio(text, voice):
     try:
         import edge_tts
-        # Try full text first
         try:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
                 output_path = tmp.name
@@ -241,7 +388,6 @@ async def generate_audio(text, voice):
         if not temp_files:
             return None
 
-        # Check ffmpeg availability
         ffmpeg_available = False
         try:
             subprocess.run(["ffmpeg", "-version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
@@ -318,17 +464,17 @@ def play_audio(audio_files):
             os.unlink(audio_files)
 
 # ---------- MAIN CONTENT ----------
-st.markdown("""
+st.markdown(f"""
 <div class="main-title">
-    <h1>🇭🇹 Haiti Community Resilience Initiative</h1>
-    <p>Solar-Powered · Water-Secure · Food-Sustainable · Digitally-Connected · All 10 Departments</p>
+    <h1>{ui['app_title']}</h1>
+    <p>{ui['app_subtitle']}</p>
 </div>
 """, unsafe_allow_html=True)
 
 # Audio buttons
 col_audio1, col_audio2 = st.columns(2)
 with col_audio1:
-    if st.button("🔊 Listen in English", key="en_btn", use_container_width=False):
+    if st.button(ui['btn_en'], key="en_btn", use_container_width=False):
         with st.spinner("Generating English audio..."):
             audio_files = asyncio.run(generate_audio(ENGLISH_SCRIPT, "en-US-JennyNeural"))
             if audio_files:
@@ -337,7 +483,7 @@ with col_audio1:
                 st.error("Failed to generate audio.")
 
 with col_audio2:
-    if st.button("🔊 Écouter en français", key="fr_btn", use_container_width=False):
+    if st.button(ui['btn_fr'], key="fr_btn", use_container_width=False):
         with st.spinner("Génération de l'audio français..."):
             audio_files = asyncio.run(generate_audio(FRENCH_SCRIPT, "fr-FR-DeniseNeural"))
             if audio_files:
@@ -347,127 +493,83 @@ with col_audio2:
 
 # ---------- PROJECT OVERVIEW ----------
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
-st.markdown("### 🎯 Project Overview")
-st.markdown("""
-**Haiti** is a country of immense potential, blessed with abundant sunshine, fertile land, and a resilient population. Yet millions of Haitians lack reliable electricity, clean water, and internet access. The **Haiti Community Resilience Initiative** is a replicable model designed to be implemented in **all 10 departments** of the country – from Artibonite to Sud-Est.
-
-**Key Objectives:**
-- ⚡ Provide reliable solar electricity for homes and community spaces
-- 💧 Deliver clean drinking water through solar-powered purification
-- 🌱 Train families in sustainable gardening on their own land
-- 🌐 Connect communities to the global digital economy
-- 📚 Create spaces for education, entrepreneurship, and innovation
-""")
+st.markdown(f"### {ui['overview_title']}")
+st.markdown(ui['overview_text'])
+st.markdown(f"{ui['objectives']}")
+st.markdown(f"- {ui['obj1']}")
+st.markdown(f"- {ui['obj2']}")
+st.markdown(f"- {ui['obj3']}")
+st.markdown(f"- {ui['obj4']}")
+st.markdown(f"- {ui['obj5']}")
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- THE CHALLENGE ----------
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
-st.markdown("### ⚠️ The Challenge")
-st.markdown("""
-| Issue | Current Reality | Impact |
-|-------|-----------------|--------|
-| Electricity | No grid access in rural areas; expensive generators | Limited productivity, no refrigeration, dark evenings |
-| Water | Unsafe sources, latrines still in use | Health risks, waterborne diseases |
-| Internet | Unreliable mobile hotspots | No digital learning, no remote work |
-| Food | Limited access to fresh produce | Poor nutrition, food insecurity |
-""")
+st.markdown(f"### {ui['challenge_title']}")
+st.markdown(ui['challenge_table'])
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- SOLUTION ----------
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
-st.markdown("### 💡 Our Solution: 3 Phases")
+st.markdown(f"### {ui['solution_title']}")
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.markdown("#### ⚡ Phase 1")
-    st.markdown("**Solar Microgrid**")
-    st.markdown("- 5kW solar array")
-    st.markdown("- Battery storage")
-    st.markdown("- Community well pump")
-    st.markdown("- Water purification system")
-    st.markdown("- Computer lab power")
+    st.markdown(f"#### {ui['phase1_title']}")
+    st.markdown(f"**{ui['phase1_sub']}**")
+    st.markdown(ui['phase1_items'])
 with col2:
-    st.markdown("#### 🌱 Phase 2")
-    st.markdown("**Community Gardening**")
-    st.markdown("- Training program")
-    st.markdown("- Seeds & tools")
-    st.markdown("- Composting system")
-    st.markdown("- Rainwater harvesting")
-    st.markdown("- Market access support")
+    st.markdown(f"#### {ui['phase2_title']}")
+    st.markdown(f"**{ui['phase2_sub']}**")
+    st.markdown(ui['phase2_items'])
 with col3:
-    st.markdown("#### 🌐 Phase 3")
-    st.markdown("**Digital Hub**")
-    st.markdown("- 10 computers")
-    st.markdown("- Satellite internet")
-    st.markdown("- Coding classes")
-    st.markdown("- Remote work training")
-    st.markdown("- Global marketplace")
+    st.markdown(f"#### {ui['phase3_title']}")
+    st.markdown(f"**{ui['phase3_sub']}**")
+    st.markdown(ui['phase3_items'])
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- BUDGET ----------
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
-st.markdown("### 💰 Affordable Budget *per community hub*")
-st.markdown("*Total investment: $75,000 USD*")
-
-budget_items = [
-    ("Solar panels & batteries", "$18,000"),
-    ("Water well & purification", "$12,000"),
-    ("Garden tools & seeds", "$8,000"),
-    ("Computers & internet equipment", "$15,000"),
-    ("Training & education programs", "$10,000"),
-    ("Transport & logistics", "$6,000"),
-    ("Project management (12 months)", "$6,000"),
-]
+st.markdown(f"### {ui['budget_title']}")
+st.markdown(f"*{ui['budget_total']}*")
 st.markdown('<div style="margin-top: 10px;">', unsafe_allow_html=True)
-for item, cost in budget_items:
+for item, cost in ui['budget_items']:
     st.markdown(f'<div class="budget-row"><span>{item}</span><span>{cost}</span></div>', unsafe_allow_html=True)
-st.markdown(f'<div class="budget-total">Total: $75,000 USD</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="budget-total">{ui["budget_final"]}</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- CONTACT & SUPPORT ----------
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
-st.markdown("### 🤝 Get Involved")
-st.markdown("""
-We invite sponsors, investors, and partners to join us in transforming Haiti, one community at a time. Your contribution will:
-- 💡 Bring light to families
-- 💧 Provide clean water
-- 🌱 Grow food security
-- 🌐 Connect communities to the world
-- 👩‍🎓 Educate the next generation
-
-**We are open to partnerships at any level.** Whether you can provide funding, equipment, expertise, or networking, your support matters.
-""")
+st.markdown(f"### {ui['involved_title']}")
+st.markdown(ui['involved_text'])
+st.markdown(ui['involved_items'])
+st.markdown(ui['involved_note'])
 
 st.markdown('<div class="contact-box">', unsafe_allow_html=True)
-st.markdown("### 📞 Contact Information")
-st.markdown("""
-**Gesner Deslandes**  
-Engineer-in-Chief at GlobalInternet.py
-
-📧 **Email:** [deslandes78@gmail.com](mailto:deslandes78@gmail.com)  
-📱 **Phone:** (509) 4738-5663 (Moncash / Prisme Transfer)  
-🌐 **Website:** [GlobalInternet.py](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app/)
-""")
+st.markdown(f"### {ui['contact_title']}")
+st.markdown(ui['contact_name'])
+st.markdown(ui['contact_email'])
+st.markdown(ui['contact_phone'])
+st.markdown(ui['contact_website'])
+st.markdown(f"**{ui['demo_link']}**")
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- CALL TO ACTION ----------
-st.markdown("""
+st.markdown(f"""
 <div style="background: linear-gradient(135deg, #4a90d9, #7bb3e8); border-radius: 16px; padding: 2rem; text-align: center; color: white; margin-top: 1rem;">
-    <h2 style="margin: 0; color: white;">🇭🇹 Be the Light for Haiti</h2>
-    <p style="font-size: 1.1rem; opacity: 0.95;">Your sponsorship can transform communities across all 10 departments. Contact us today to start the conversation.</p>
+    <h2 style="margin: 0; color: white;">{ui['cta_title']}</h2>
+    <p style="font-size: 1.1rem; opacity: 0.95;">{ui['cta_text']}</p>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------- FOOTER ----------
-st.markdown("""
+st.markdown(f"""
 <div class="footer">
-    Built by <strong>Gesner Deslandes</strong>, Engineer‑in‑Chief at GlobalInternet.py<br>
-    Solar-powered • Community-driven • Future-focused • Nation-wide
+    {ui['footer_text']}
 </div>
 """, unsafe_allow_html=True)
 
-# Optional: print a note that the audio reads the entire page (for user awareness)
-st.markdown("""
-<small style="color: #4a6a8a;">ℹ️ The AI audio in both languages reads the full page content – including the sidebar and all sections.</small>
+st.markdown(f"""
+<small style="color: #4a6a8a;">{ui['audio_note']}</small>
 """, unsafe_allow_html=True)
