@@ -4,6 +4,8 @@ import tempfile
 import os
 import base64
 import re
+import subprocess
+import time
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
@@ -142,8 +144,8 @@ Parlons maintenant de la barre latérale. La barre latérale contient le navigat
 Conclusion. Comment ce projet est-il possible ? Il est possible parce que nous combinons des technologies éprouvées avec les connaissances locales et la participation communautaire. Le soleil abondant fournit de l'énergie gratuite. La terre fertile peut produire de la nourriture. Les gens ont la volonté et les compétences pour le faire fonctionner. Avec le bon partenariat et un investissement modeste, nous pouvons transformer cette vision en réalité. Nous invitons tous les sponsors à visiter la démo en direct de ce projet à l'adresse suivante : https://grand-goave-community-hub.streamlit.app pour voir la proposition complète et le budget interactif. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir. Merci pour votre soutien.
 """
 
-# ---------- CHUNKING FUNCTION FOR LONG TTS ----------
-def split_text_into_chunks(text, max_chars=1000):
+# ---------- CHUNKING FUNCTION ----------
+def split_text_into_chunks(text, max_chars=1500):
     sentences = re.split(r'(?<=[。！？.!?])', text)
     chunks = []
     current = ""
@@ -156,39 +158,65 @@ def split_text_into_chunks(text, max_chars=1000):
             current = sent
     if current:
         chunks.append(current.strip())
+    # If a single chunk is still too long, split by words
     final_chunks = []
     for chunk in chunks:
         if len(chunk) <= max_chars:
             final_chunks.append(chunk)
         else:
-            for i in range(0, len(chunk), max_chars):
-                final_chunks.append(chunk[i:i+max_chars])
+            words = chunk.split()
+            part = ""
+            for word in words:
+                if len(part) + len(word) + 1 <= max_chars:
+                    part += " " + word
+                else:
+                    if part:
+                        final_chunks.append(part.strip())
+                    part = word
+            if part:
+                final_chunks.append(part.strip())
     return final_chunks
 
 async def generate_audio(text, voice):
     try:
         import edge_tts
-        chunks = split_text_into_chunks(text, 1000)
-        if len(chunks) == 1:
-            # single chunk
+        # First, try to generate the entire text at once
+        try:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
                 output_path = tmp.name
             comm = edge_tts.Communicate(text, voice)
             await comm.save(output_path)
-            return output_path
-        else:
-            # multiple chunks
-            temp_files = []
-            for i, chunk in enumerate(chunks):
+            if os.path.getsize(output_path) > 0:
+                return output_path
+        except Exception as e:
+            st.warning(f"Full text generation failed ({e}). Trying chunked fallback...")
+
+        # If that fails, split into chunks and concatenate using ffmpeg (if available)
+        chunks = split_text_into_chunks(text, 1000)
+        temp_files = []
+        for i, chunk in enumerate(chunks):
+            try:
                 with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
                     temp_path = tmp.name
                 comm = edge_tts.Communicate(chunk, voice)
                 await comm.save(temp_path)
                 if os.path.getsize(temp_path) > 0:
                     temp_files.append(temp_path)
-            if not temp_files:
-                return None
-            # concatenate
+            except Exception as e:
+                st.error(f"Chunk {i+1} failed: {e}")
+        if not temp_files:
+            return None
+
+        # Check if ffmpeg is available
+        ffmpeg_available = False
+        try:
+            subprocess.run(["ffmpeg", "-version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+            ffmpeg_available = True
+        except:
+            ffmpeg_available = False
+
+        if ffmpeg_available and len(temp_files) > 1:
+            # Concatenate with ffmpeg
             concat_file = "concat_list.txt"
             with open(concat_file, "w") as f:
                 for tf in temp_files:
@@ -196,23 +224,75 @@ async def generate_audio(text, voice):
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
                 output_path = tmp.name
             cmd = ["ffmpeg", "-f", "concat", "-safe", "0", "-i", concat_file, "-c", "copy", output_path, "-y"]
-            import subprocess
-            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            for tf in temp_files:
-                os.remove(tf)
-            os.remove(concat_file)
-            return output_path
+            try:
+                subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+                for tf in temp_files:
+                    os.remove(tf)
+                os.remove(concat_file)
+                return output_path
+            except Exception as e:
+                st.error(f"FFmpeg concatenation failed: {e}. Playing first chunk only.")
+                return temp_files[0] if temp_files else None
+        else:
+            # If only one chunk or ffmpeg not available, return the first chunk (or we could play sequentially)
+            if len(temp_files) == 1:
+                return temp_files[0]
+            else:
+                # Return a list of files to play sequentially (we'll handle in play_audio)
+                return temp_files
     except Exception as e:
         st.error(f"Audio generation error: {e}")
         return None
 
-def play_audio(audio_path):
-    if audio_path and os.path.exists(audio_path):
-        with open(audio_path, "rb") as f:
-            audio_bytes = f.read()
-            b64 = base64.b64encode(audio_bytes).decode()
-            st.markdown(f'<audio controls src="data:audio/mp3;base64,{b64}" autoplay style="width:100%;"></audio>', unsafe_allow_html=True)
-        os.unlink(audio_path)
+def play_audio(audio_files):
+    if isinstance(audio_files, list):
+        # Play sequentially using HTML5 audio with JavaScript
+        if not audio_files:
+            return
+        # Build HTML with multiple audio elements and a script to play them in sequence
+        html = """
+        <div id="audio-container"></div>
+        <script>
+        (function() {
+            const container = document.getElementById('audio-container');
+            const audioSources = [];
+        """
+        for i, path in enumerate(audio_files):
+            if os.path.exists(path):
+                with open(path, "rb") as f:
+                    audio_bytes = f.read()
+                    b64 = base64.b64encode(audio_bytes).decode()
+                    html += f"audioSources.push('data:audio/mp3;base64,{b64}');\n"
+        html += """
+            let index = 0;
+            function playNext() {
+                if (index >= audioSources.length) return;
+                const audio = document.createElement('audio');
+                audio.src = audioSources[index];
+                audio.controls = true;
+                audio.autoplay = true;
+                audio.style.width = '100%';
+                container.appendChild(audio);
+                audio.onended = function() {
+                    index++;
+                    playNext();
+                };
+            }
+            playNext();
+        })();
+        </script>
+        """
+        st.markdown(html, unsafe_allow_html=True)
+        # Clean up files after playing? We'll clean up later.
+        # For now, we leave them; they will be deleted when script ends.
+    else:
+        # Single file
+        if audio_files and os.path.exists(audio_files):
+            with open(audio_files, "rb") as f:
+                audio_bytes = f.read()
+                b64 = base64.b64encode(audio_bytes).decode()
+                st.markdown(f'<audio controls src="data:audio/mp3;base64,{b64}" autoplay style="width:100%;"></audio>', unsafe_allow_html=True)
+            os.unlink(audio_files)
 
 # ---------- SIDEBAR ----------
 with st.sidebar:
@@ -245,18 +325,18 @@ col_audio1, col_audio2 = st.columns(2)
 with col_audio1:
     if st.button("🔊 Listen in English", key="en_btn", use_container_width=False):
         with st.spinner("Generating English audio..."):
-            audio_file = asyncio.run(generate_audio(ENGLISH_SCRIPT, "en-US-JennyNeural"))
-            if audio_file:
-                play_audio(audio_file)
+            audio_files = asyncio.run(generate_audio(ENGLISH_SCRIPT, "en-US-JennyNeural"))
+            if audio_files:
+                play_audio(audio_files)
             else:
                 st.error("Failed to generate audio.")
 
 with col_audio2:
     if st.button("🔊 Écouter en français", key="fr_btn", use_container_width=False):
         with st.spinner("Génération de l'audio français..."):
-            audio_file = asyncio.run(generate_audio(FRENCH_SCRIPT, "fr-FR-DeniseNeural"))
-            if audio_file:
-                play_audio(audio_file)
+            audio_files = asyncio.run(generate_audio(FRENCH_SCRIPT, "fr-FR-DeniseNeural"))
+            if audio_files:
+                play_audio(audio_files)
             else:
                 st.error("Échec de la génération audio.")
 
