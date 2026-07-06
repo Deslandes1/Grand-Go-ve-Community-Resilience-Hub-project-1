@@ -127,6 +127,7 @@ with st.sidebar:
     st.markdown("Ready for impact across all departments")
 
 # ---------- FULL NARRATION SCRIPTS ----------
+# Both scripts now cover the entire page content, including the sidebar, in full detail.
 ENGLISH_SCRIPT = """
 Haiti Community Resilience Initiative. Solar-Powered, Water-Secure, Food-Sustainable, Digitally-Connected – for all 10 departments of Haiti.
 
@@ -148,9 +149,9 @@ Be the Light for Haiti. Your sponsorship can transform communities across all 10
 
 Built by Gesner Deslandes, Engineer-in-Chief at GlobalInternet.py. Solar-powered, Community-driven, Future-focused.
 
-Now, let's look at the sidebar. The sidebar lists all ten departments of Haiti where this initiative can be implemented: Artibonite, Centre, Grand'Anse, Nippes, Nord, Nord-Est, Nord-Ouest, Ouest, Sud, and Sud-Est. It also shows that Haiti has a population of about 11 million, over 300 sunny days per year, and is ready for impact across all departments.
+Now, let's look at the sidebar. The sidebar lists the project navigator with sections: Overview, The Challenge, Our Solution, Budget, and Get Involved. It also shows all ten departments where this initiative can be implemented: Artibonite, Centre, Grand'Anse, Nippes, Nord, Nord-Est, Nord-Ouest, Ouest, Sud, and Sud-Est. Haiti has a population of about 11 million, over 300 sunny days per year, and is ready for impact across all departments.
 
-Conclusion. How is this project possible? It is possible because we combine proven technologies with local knowledge and community participation. The abundant sunshine provides free energy. The fertile land can grow food. The people have the will and the skills to make it work. With the right partnership and modest investment, we can turn this vision into reality. We invite all sponsors to visit the live demo of this project at the following link: https://grand-goave-community-hub.streamlit.app to see the full proposal and interactive budget breakdown. Together, we can build resilience, dignity, and hope for all of Haiti. Thank you for your support.
+Conclusion. How is this project possible? It is possible because we combine proven technologies with local knowledge and community participation. The abundant sunshine provides free energy. The fertile land can grow food. The people have the will and the skills to make it work. With the right partnership and modest investment, we can turn this vision into reality. We invite all sponsors to visit the live demo of this project at the following link: https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/ to see the full proposal and interactive budget breakdown. Together, we can build resilience, dignity, and hope for all of Haiti. Thank you for your support.
 """
 
 FRENCH_SCRIPT = """
@@ -174,9 +175,9 @@ Soyez la lumière pour Haïti. Votre parrainage peut transformer des communauté
 
 Construit par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py. Solaire, communautaire, tourné vers l'avenir.
 
-Parlons maintenant de la barre latérale. La barre latérale liste les dix départements d'Haïti où cette initiative peut être mise en œuvre : Artibonite, Centre, Grand'Anse, Nippes, Nord, Nord-Est, Nord-Ouest, Ouest, Sud et Sud-Est. Elle indique également qu'Haïti a une population d'environ 11 millions d'habitants, plus de 300 jours d'ensoleillement par an, et est prête pour un impact dans tous les départements.
+Parlons maintenant de la barre latérale. La barre latérale contient le navigateur de projet avec les sections : Aperçu, Le défi, Notre solution, Budget et Participez. Elle liste les dix départements ciblés : Artibonite, Centre, Grand'Anse, Nippes, Nord, Nord-Est, Nord-Ouest, Ouest, Sud et Sud-Est. Elle indique également qu'Haïti a une population d'environ 11 millions d'habitants, plus de 300 jours d'ensoleillement par an, et est prête pour un impact dans tous les départements.
 
-Conclusion. Comment ce projet est-il possible ? Il est possible parce que nous combinons des technologies éprouvées avec les connaissances locales et la participation communautaire. Le soleil abondant fournit de l'énergie gratuite. La terre fertile peut produire de la nourriture. Les gens ont la volonté et les compétences pour le faire fonctionner. Avec le bon partenariat et un investissement modeste, nous pouvons transformer cette vision en réalité. Nous invitons tous les sponsors à visiter la démo en direct de ce projet à l'adresse suivante : https://grand-goave-community-hub.streamlit.app pour voir la proposition complète et le budget interactif. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir pour toute la nation haïtienne. Merci pour votre soutien.
+Conclusion. Comment ce projet est-il possible ? Il est possible parce que nous combinons des technologies éprouvées avec les connaissances locales et la participation communautaire. Le soleil abondant fournit de l'énergie gratuite. La terre fertile peut produire de la nourriture. Les gens ont la volonté et les compétences pour le faire fonctionner. Avec le bon partenariat et un investissement modeste, nous pouvons transformer cette vision en réalité. Nous invitons tous les sponsors à visiter la démo en direct de ce projet à l'adresse suivante : https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/ pour voir la proposition complète et le budget interactif. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir pour toute la nation haïtienne. Merci pour votre soutien.
 """
 
 # ---------- CHUNKING & AUDIO FUNCTIONS ----------
@@ -464,4 +465,9 @@ st.markdown("""
     Built by <strong>Gesner Deslandes</strong>, Engineer‑in‑Chief at GlobalInternet.py<br>
     Solar-powered • Community-driven • Future-focused • Nation-wide
 </div>
+""", unsafe_allow_html=True)
+
+# Optional: print a note that the audio reads the entire page (for user awareness)
+st.markdown("""
+<small style="color: #4a6a8a;">ℹ️ The AI audio in both languages reads the full page content – including the sidebar and all sections.</small>
 """, unsafe_allow_html=True)
