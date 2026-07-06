@@ -3,7 +3,7 @@ import asyncio
 import tempfile
 import os
 import base64
-import edge_tts
+import re
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
@@ -81,64 +81,127 @@ st.markdown("""
     }
     .contact-box a { color: #4a90d9; text-decoration: none; font-weight: 600; }
     .contact-box a:hover { text-decoration: underline; }
-    .audio-btn {
-        background: #4a90d9 !important;
-        color: white !important;
-        border-radius: 50px !important;
-        padding: 0.3rem 1.2rem !important;
-        font-size: 0.9rem !important;
-        border: none !important;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(74,144,217,0.2) !important;
-    }
-    .audio-btn:hover {
-        background: #7bb3e8 !important;
-        transform: scale(1.03);
-    }
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- AUDIO SCRIPTS ----------
+# ---------- SIDEBAR CONTENT (also used for narration) ----------
+sidebar_text = """
+Grand Goâve Hub – Project Navigator. The sidebar contains the following sections: Overview, The Challenge, Our Solution, Budget, and Get Involved. Grand Goâve, Haiti – population about ten thousand, sunny days over three hundred per year, and the community is ready for impact.
+"""
+
+# ---------- FULL NARRATION SCRIPTS ----------
 ENGLISH_SCRIPT = """
-Grand Goâve Community Resilience Hub – A Project by GlobalInternet.py.
+Grand Goâve Community Resilience Hub. Solar-Powered, Water-Secure, Food-Sustainable, Digitally-Connected.
 
-Imagine a community where solar power brings light and clean water, where families grow their own food, and where children have access to digital learning. This is not a dream. This is the Grand Goâve Community Resilience Hub.
+Project Overview. Grand Goâve is a peaceful coastal town in southern Haiti, rich in sunshine and fertile land. Yet its people lack three essentials: reliable electricity, clean water, and internet access. The Community Resilience Hub is a replicable model that addresses these challenges through solar power, sustainable agriculture, and digital connectivity.
 
-Located in the peaceful southern region of Haiti, Grand Goâve has abundant sunshine, fertile land, and hardworking people. But they lack reliable electricity, clean water, and internet access.
+The key objectives are: provide reliable solar electricity for homes and community spaces. Deliver clean drinking water through solar-powered purification. Train families in sustainable gardening on their own land. Connect the community to the global digital economy. Create a space for education, entrepreneurship, and innovation.
 
-Our project solves these challenges. Phase one installs a solar microgrid that powers a community well, a water purification system, and a small computer lab. Phase two establishes a community garden training program, teaching families to grow nutritious food on their own land. Phase three creates a digital hub where students can learn, entrepreneurs can connect, and the community can access global opportunities.
+The Challenge. Currently, there is no grid access, and generators are expensive, limiting productivity and refrigeration. Water sources are unsafe, with latrines still in use, causing health risks. Internet access is unreliable, preventing digital learning and remote work. Food insecurity is high due to limited access to fresh produce.
 
-The total investment needed is seventy-five thousand US dollars. This covers solar panels, water systems, garden tools, internet equipment, and training costs. With this support, we will transform lives and create a model that can be replicated across Haiti.
+Our Solution in Three Phases. Phase One: Solar Microgrid. This includes a five-kilowatt solar array, battery storage, a community well pump, water purification system, and power for a computer lab. Phase Two: Community Gardening. This provides training programs, seeds, tools, composting systems, rainwater harvesting, and market access support. Phase Three: Digital Hub. This includes ten computers, satellite internet, coding classes, remote work training, and access to the global marketplace.
 
-We invite sponsors and investors to partner with us. Your contribution will directly impact families, children, and the future of Grand Goâve. Together, we can build resilience, dignity, and hope.
+The affordable budget totals seventy-five thousand US dollars. Breakdown: solar panels and batteries, eighteen thousand. Water well and purification, twelve thousand. Garden tools and seeds, eight thousand. Computers and internet equipment, fifteen thousand. Training and education programs, ten thousand. Transport and logistics, six thousand. Project management for twelve months, six thousand. Total investment: seventy-five thousand US dollars.
 
-For more information, contact Gesner Deslandes by email at deslandes78@gmail.com or by phone at (509) 4738-5663. Thank you for your support.
+Get Involved. We invite sponsors, investors, and partners to join us in transforming Grand Goâve. Your contribution will bring light to families, provide clean water, grow food security, connect a community to the world, and educate the next generation. We are open to partnerships at any level. Whether you can provide funding, equipment, expertise, or networking, your support matters.
+
+Contact Information. Gesner Deslandes, Engineer-in-Chief at GlobalInternet.py. Email: deslandes78@gmail.com. Phone: (509) 4738-5663. Website: globalinternetsitepy.streamlit.app.
+
+Be the Light for Grand Goâve. Your sponsorship can transform a community. Contact us today to start the conversation.
+
+Built by Gesner Deslandes, Engineer-in-Chief at GlobalInternet.py. Solar-powered, Community-driven, Future-focused.
+
+Now, let's look at the sidebar. The sidebar contains the project navigator with sections: Overview, The Challenge, Our Solution, Budget, and Get Involved. It also shows that Grand Goâve, Haiti, has a population of about ten thousand, over three hundred sunny days per year, and is ready for impact.
+
+Conclusion. How is this project possible? It is possible because we combine proven technologies with local knowledge and community participation. The abundant sunshine provides free energy. The fertile land can grow food. The people have the will and the skills to make it work. With the right partnership and modest investment, we can turn this vision into reality. We invite all sponsors to visit the live demo of this project at the following link: https://grand-goave-community-hub.streamlit.app to see the full proposal and interactive budget breakdown. Together, we can build resilience, dignity, and hope. Thank you for your support.
 """
 
 FRENCH_SCRIPT = """
-Projet Hub de Résilience Communautaire de Grand Goâve – Un projet de GlobalInternet.py.
+Projet Hub de Résilience Communautaire de Grand Goâve. Solaire, Sécurité d'eau, Alimentation durable, Connecté numériquement.
 
-Imaginez une communauté où l'énergie solaire apporte lumière et eau potable, où les familles cultivent leur propre nourriture, et où les enfants ont accès à l'apprentissage numérique. Ce n'est pas un rêve. C'est le Hub de Résilience Communautaire de Grand Goâve.
+Aperçu du projet. Grand Goâve est une ville côtière paisible du sud d'Haïti, riche en soleil et en terres fertiles. Pourtant, ses habitants manquent de trois éléments essentiels : électricité fiable, eau potable et accès à Internet. Le Hub de Résilience Communautaire est un modèle reproductible qui relève ces défis grâce à l'énergie solaire, l'agriculture durable et la connectivité numérique.
 
-Située dans la paisible région sud d'Haïti, Grand Goâve bénéficie d'un ensoleillement abondant, de terres fertiles et de travailleurs acharnés. Mais ils manquent d'électricité fiable, d'eau potable et d'accès à Internet.
+Les objectifs clés sont : fournir de l'électricité solaire fiable pour les maisons et les espaces communautaires. Distribuer de l'eau potable via une purification solaire. Former les familles au jardinage durable sur leurs propres terres. Connecter la communauté à l'économie numérique mondiale. Créer un espace pour l'éducation, l'entrepreneuriat et l'innovation.
 
-Notre projet relève ces défis. La première phase installe un micro-réseau solaire qui alimente un puits communautaire, un système de purification d'eau et un petit laboratoire informatique. La deuxième phase établit un programme de formation au jardinage communautaire, enseignant aux familles comment cultiver des aliments nutritifs sur leurs propres terres. La troisième phase crée un hub numérique où les étudiants peuvent apprendre, les entrepreneurs peuvent se connecter et la communauté peut accéder aux opportunités mondiales.
+Le défi. Actuellement, il n'y a pas d'accès au réseau électrique, les générateurs sont chers, limitant la productivité et la réfrigération. Les sources d'eau sont dangereuses, avec des latrines encore utilisées, causant des risques sanitaires. L'accès à Internet est peu fiable, empêchant l'apprentissage numérique et le travail à distance. L'insécurité alimentaire est élevée en raison d'un accès limité aux produits frais.
 
-L'investissement total nécessaire est de soixante-quinze mille dollars américains. Cela couvre les panneaux solaires, les systèmes d'eau, les outils de jardinage, les équipements Internet et les coûts de formation. Avec ce soutien, nous transformerons des vies et créerons un modèle qui pourra être reproduit dans toute la région.
+Notre solution en trois phases. Phase un : micro-réseau solaire. Cela comprend un panneau solaire de cinq kilowatts, des batteries, une pompe de puits communautaire, un système de purification d'eau et l'alimentation d'un laboratoire informatique. Phase deux : jardinage communautaire. Cela offre des programmes de formation, des semences, des outils, des systèmes de compostage, la récupération d'eau de pluie et un soutien à l'accès au marché. Phase trois : hub numérique. Cela comprend dix ordinateurs, un accès Internet par satellite, des cours de codage, une formation au travail à distance et un accès au marché mondial.
 
-Nous invitons les sponsors et les investisseurs à s'associer à nous. Votre contribution aura un impact direct sur les familles, les enfants et l'avenir de Grand Goâve. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir.
+Le budget abordable totalise soixante-quinze mille dollars américains. Détails : panneaux solaires et batteries, dix-huit mille. Puits et purification d'eau, douze mille. Outils et semences de jardin, huit mille. Ordinateurs et équipements Internet, quinze mille. Formation et programmes éducatifs, dix mille. Transport et logistique, six mille. Gestion de projet pendant douze mois, six mille. Investissement total : soixante-quinze mille dollars américains.
 
-Pour plus d'informations, contactez Gesner Deslandes par email à deslandes78@gmail.com ou par téléphone au (509) 4738-5663. Merci pour votre soutien.
+Participez. Nous invitons les sponsors, investisseurs et partenaires à se joindre à nous pour transformer Grand Goâve. Votre contribution apportera la lumière aux familles, fournira de l'eau potable, améliorera la sécurité alimentaire, connectera la communauté au monde et éduquera la prochaine génération. Nous sommes ouverts aux partenariats à tous les niveaux. Que vous puissiez fournir du financement, de l'équipement, de l'expertise ou du réseautage, votre soutien est important.
+
+Coordonnées. Gesner Deslandes, ingénieur en chef chez GlobalInternet.py. Email : deslandes78@gmail.com. Téléphone : (509) 4738-5663. Site web : globalinternetsitepy.streamlit.app.
+
+Soyez la lumière pour Grand Goâve. Votre parrainage peut transformer une communauté. Contactez-nous dès aujourd'hui pour lancer la conversation.
+
+Construit par Gesner Deslandes, ingénieur en chef chez GlobalInternet.py. Solaire, communautaire, tourné vers l'avenir.
+
+Parlons maintenant de la barre latérale. La barre latérale contient le navigateur de projet avec les sections : Aperçu, Le défi, Notre solution, Budget et Participez. Elle indique également que Grand Goâve, Haïti, a une population d'environ dix mille habitants, plus de trois cents jours d'ensoleillement par an, et est prête pour l'impact.
+
+Conclusion. Comment ce projet est-il possible ? Il est possible parce que nous combinons des technologies éprouvées avec les connaissances locales et la participation communautaire. Le soleil abondant fournit de l'énergie gratuite. La terre fertile peut produire de la nourriture. Les gens ont la volonté et les compétences pour le faire fonctionner. Avec le bon partenariat et un investissement modeste, nous pouvons transformer cette vision en réalité. Nous invitons tous les sponsors à visiter la démo en direct de ce projet à l'adresse suivante : https://grand-goave-community-hub.streamlit.app pour voir la proposition complète et le budget interactif. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir. Merci pour votre soutien.
 """
 
-# ---------- AUDIO GENERATION ----------
+# ---------- CHUNKING FUNCTION FOR LONG TTS ----------
+def split_text_into_chunks(text, max_chars=1000):
+    sentences = re.split(r'(?<=[。！？.!?])', text)
+    chunks = []
+    current = ""
+    for sent in sentences:
+        if len(current) + len(sent) <= max_chars:
+            current += sent
+        else:
+            if current:
+                chunks.append(current.strip())
+            current = sent
+    if current:
+        chunks.append(current.strip())
+    final_chunks = []
+    for chunk in chunks:
+        if len(chunk) <= max_chars:
+            final_chunks.append(chunk)
+        else:
+            for i in range(0, len(chunk), max_chars):
+                final_chunks.append(chunk[i:i+max_chars])
+    return final_chunks
+
 async def generate_audio(text, voice):
     try:
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
-            output_path = tmp.name
-        comm = edge_tts.Communicate(text, voice)
-        await comm.save(output_path)
-        return output_path
+        import edge_tts
+        chunks = split_text_into_chunks(text, 1000)
+        if len(chunks) == 1:
+            # single chunk
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
+                output_path = tmp.name
+            comm = edge_tts.Communicate(text, voice)
+            await comm.save(output_path)
+            return output_path
+        else:
+            # multiple chunks
+            temp_files = []
+            for i, chunk in enumerate(chunks):
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
+                    temp_path = tmp.name
+                comm = edge_tts.Communicate(chunk, voice)
+                await comm.save(temp_path)
+                if os.path.getsize(temp_path) > 0:
+                    temp_files.append(temp_path)
+            if not temp_files:
+                return None
+            # concatenate
+            concat_file = "concat_list.txt"
+            with open(concat_file, "w") as f:
+                for tf in temp_files:
+                    f.write(f"file '{tf}'\n")
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
+                output_path = tmp.name
+            cmd = ["ffmpeg", "-f", "concat", "-safe", "0", "-i", concat_file, "-c", "copy", output_path, "-y"]
+            import subprocess
+            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            for tf in temp_files:
+                os.remove(tf)
+            os.remove(concat_file)
+            return output_path
     except Exception as e:
         st.error(f"Audio generation error: {e}")
         return None
