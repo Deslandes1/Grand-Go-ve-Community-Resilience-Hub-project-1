@@ -99,7 +99,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- UI DICTIONARY (ALL TEXT IN ENGLISH & FRENCH) ----------
+# ---------- UI DICTIONARY (ALL TEXT IN ENGLISH, FRENCH, SPANISH) ----------
 UI = {
     "English": {
         "language_label": "🌐 Language",
@@ -160,9 +160,10 @@ UI = {
         "cta_title": "🇭🇹 Be the Light for Haiti",
         "cta_text": "Your sponsorship can transform communities across all 10 departments. Contact us today to start the conversation.",
         "footer_text": "Built by **Gesner Deslandes**, Engineer‑in‑Chief at GlobalInternet.py  \nSolar-powered • Community-driven • Future-focused • Nation-wide",
-        "audio_note": "ℹ️ The AI audio in both languages reads the full page content – including the sidebar and all sections.",
+        "audio_note": "ℹ️ The AI audio in all languages reads the full page content – including the sidebar and all sections.",
         "btn_en": "🔊 Listen in English",
         "btn_fr": "🔊 Écouter en français",
+        "btn_es": "🔊 Escuchar en español",
         "demo_link": "Live Demo: https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/"
     },
     "French": {
@@ -224,10 +225,76 @@ UI = {
         "cta_title": "🇭🇹 Soyez la lumière pour Haïti",
         "cta_text": "Votre parrainage peut transformer des communautés dans les 10 départements. Contactez-nous dès aujourd'hui pour lancer la conversation.",
         "footer_text": "Construit par **Gesner Deslandes**, ingénieur en chef chez GlobalInternet.py  \nSolaire · Communautaire · Tourné vers l'avenir · National",
-        "audio_note": "ℹ️ L'audio IA dans les deux langues lit tout le contenu de la page – y compris la barre latérale et toutes les sections.",
+        "audio_note": "ℹ️ L'audio IA dans les trois langues lit tout le contenu de la page – y compris la barre latérale et toutes les sections.",
         "btn_en": "🔊 Listen in English",
         "btn_fr": "🔊 Écouter en français",
-        "demo_link": "Démo en direct : https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/"
+        "btn_es": "🔊 Escuchar en español",
+        "demo_link": "Demo en directo: https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/"
+    },
+    "Spanish": {
+        "language_label": "🌐 Idioma",
+        "app_title": "🇭🇹 Iniciativa de Resiliencia Comunitaria de Haití",
+        "app_subtitle": "Energía Solar · Agua Segura · Alimentación Sostenible · Conectividad Digital · Los 10 Departamentos",
+        "sidebar_title": "🇭🇹 Iniciativa Haití",
+        "nav_overview": "1. Resumen",
+        "nav_challenge": "2. El desafío",
+        "nav_solution": "3. Nuestra solución",
+        "nav_budget": "4. Presupuesto",
+        "nav_involved": "5. Participe",
+        "departments_label": "📍 Departamentos objetivo",
+        "at_a_glance": "🇭🇹 Haití de un vistazo",
+        "population": "Población: ~11 millones",
+        "sunny_days": "Días soleados: 300+/año",
+        "status": "Listo para impacto en todos los departamentos",
+        "overview_title": "🎯 Resumen del proyecto",
+        "overview_text": "**Haití** es un país de inmenso potencial, bendecido con abundante sol, tierras fértiles y una población resiliente. Sin embargo, millones de haitianos carecen de electricidad confiable, agua potable y acceso a Internet. La **Iniciativa de Resiliencia Comunitaria de Haití** es un modelo replicable diseñado para implementarse en los **10 departamentos** del país – desde Artibonite hasta Sud-Est.",
+        "objectives": "**Objetivos clave:**",
+        "obj1": "⚡ Proporcionar electricidad solar confiable para hogares y espacios comunitarios",
+        "obj2": "💧 Entregar agua potable mediante purificación solar",
+        "obj3": "🌱 Capacitar a familias en jardinería sostenible en sus propias tierras",
+        "obj4": "🌐 Conectar comunidades a la economía digital global",
+        "obj5": "📚 Crear espacios para educación, emprendimiento e innovación",
+        "challenge_title": "⚠️ El desafío",
+        "challenge_table": "| Problema | Realidad actual | Impacto |\n|----------|-----------------|--------|\n| Electricidad | Sin acceso a la red en zonas rurales; generadores caros | Productividad limitada, sin refrigeración, noches oscuras |\n| Agua | Fuentes inseguras, letrinas aún en uso | Riesgos sanitarios, enfermedades hídricas |\n| Internet | Puntos de acceso móvil poco fiables | Sin aprendizaje digital, sin trabajo remoto |\n| Alimentación | Acceso limitado a productos frescos | Mala nutrición, inseguridad alimentaria |",
+        "solution_title": "💡 Nuestra solución en 3 fases",
+        "phase1_title": "⚡ Fase 1",
+        "phase1_sub": "Microrred solar",
+        "phase1_items": "- Panel solar 5kW\n- Baterías de almacenamiento\n- Bomba de pozo comunitario\n- Sistema de purificación de agua\n- Alimentación del laboratorio informático",
+        "phase2_title": "🌱 Fase 2",
+        "phase2_sub": "Jardinería comunitaria",
+        "phase2_items": "- Programa de formación\n- Semillas y herramientas\n- Sistema de compostaje\n- Captación de agua de lluvia\n- Apoyo para acceso al mercado",
+        "phase3_title": "🌐 Fase 3",
+        "phase3_sub": "Centro digital",
+        "phase3_items": "- 10 computadoras\n- Internet satelital\n- Clases de programación\n- Capacitación en trabajo remoto\n- Acceso al mercado global",
+        "budget_title": "💰 Presupuesto asequible *por centro comunitario*",
+        "budget_total": "Inversión total: $75,000 USD",
+        "budget_items": [
+            ("Paneles solares y baterías", "$18,000"),
+            ("Pozo y purificación de agua", "$12,000"),
+            ("Herramientas y semillas de jardín", "$8,000"),
+            ("Computadoras y equipos de Internet", "$15,000"),
+            ("Programas de formación y educación", "$10,000"),
+            ("Transporte y logística", "$6,000"),
+            ("Gestión del proyecto (12 meses)", "$6,000"),
+        ],
+        "budget_final": "Total: $75,000 USD",
+        "involved_title": "🤝 Participe",
+        "involved_text": "Invitamos a patrocinadores, inversores y socios a unirse a nosotros para transformar Haití, una comunidad a la vez. Su contribución:",
+        "involved_items": "- 💡 Traerá luz a las familias\n- 💧 Proporcionará agua potable\n- 🌱 Mejorará la seguridad alimentaria\n- 🌐 Conectará comunidades al mundo\n- 👩‍🎓 Educará a la próxima generación",
+        "involved_note": "**Estamos abiertos a alianzas a todos los niveles.** Ya sea que pueda proporcionar financiamiento, equipos, experiencia o contactos, su apoyo es importante.",
+        "contact_title": "📞 Información de contacto",
+        "contact_name": "**Gesner Deslandes**  \nIngeniero Jefe en GlobalInternet.py",
+        "contact_email": "📧 **Correo:** [deslandes78@gmail.com](mailto:deslandes78@gmail.com)",
+        "contact_phone": "📱 **Teléfono:** (509) 4738-5663 (Moncash / Prisme Transfer)",
+        "contact_website": "🌐 **Sitio web:** [GlobalInternet.py](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app/)",
+        "cta_title": "🇭🇹 Sea la luz para Haití",
+        "cta_text": "Su patrocinio puede transformar comunidades en los 10 departamentos. Contáctenos hoy para iniciar la conversación.",
+        "footer_text": "Construido por **Gesner Deslandes**, Ingeniero Jefe en GlobalInternet.py  \nEnergía solar · Impulsado por la comunidad · Enfocado al futuro · Nacional",
+        "audio_note": "ℹ️ El audio IA en los tres idiomas lee todo el contenido de la página – incluyendo la barra lateral y todas las secciones.",
+        "btn_en": "🔊 Listen in English",
+        "btn_fr": "🔊 Écouter en français",
+        "btn_es": "🔊 Escuchar en español",
+        "demo_link": "Demo en vivo: https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/"
     }
 }
 
@@ -267,15 +334,15 @@ with st.sidebar:
     st.markdown("---")
     lang_choice = st.selectbox(
         ui['language_label'],
-        options=["English", "French"],
-        index=0 if lang == "English" else 1,
+        options=["English", "French", "Spanish"],
+        index=["English", "French", "Spanish"].index(st.session_state.lang),
         key="lang_select"
     )
     if lang_choice != st.session_state.lang:
         st.session_state.lang = lang_choice
         st.rerun()
 
-# ---------- NARRATION SCRIPTS ----------
+# ---------- NARRATION SCRIPTS (Full Content in Each Language) ----------
 ENGLISH_SCRIPT = """
 Haiti Community Resilience Initiative. Solar-Powered, Water-Secure, Food-Sustainable, Digitally-Connected – for all 10 departments of Haiti.
 
@@ -328,6 +395,32 @@ Parlons maintenant de la barre latérale. La barre latérale contient le navigat
 Conclusion. Comment ce projet est-il possible ? Il est possible parce que nous combinons des technologies éprouvées avec les connaissances locales et la participation communautaire. Le soleil abondant fournit de l'énergie gratuite. La terre fertile peut produire de la nourriture. Les gens ont la volonté et les compétences pour le faire fonctionner. Avec le bon partenariat et un investissement modeste, nous pouvons transformer cette vision en réalité. Nous invitons tous les sponsors à visiter la démo en direct de ce projet à l'adresse suivante : https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/ pour voir la proposition complète et le budget interactif. Ensemble, nous pouvons bâtir la résilience, la dignité et l'espoir pour toute la nation haïtienne. Merci pour votre soutien.
 """
 
+SPANISH_SCRIPT = """
+Iniciativa de Resiliencia Comunitaria de Haití. Energía Solar, Agua Segura, Alimentación Sostenible, Conectividad Digital – para los 10 departamentos de Haití.
+
+Resumen del proyecto. Haití es un país de inmenso potencial, bendecido con abundante sol, tierras fértiles y una población resiliente. Sin embargo, millones de haitianos carecen de electricidad confiable, agua potable y acceso a Internet. La Iniciativa de Resiliencia Comunitaria de Haití es un modelo replicable diseñado para implementarse en cada departamento del país – desde Artibonite hasta Sud-Est.
+
+Los objetivos clave son: proporcionar electricidad solar confiable para hogares y espacios comunitarios. Entregar agua potable mediante purificación solar. Capacitar a familias en jardinería sostenible en sus propias tierras. Conectar comunidades a la economía digital global. Crear espacios para educación, emprendimiento e innovación.
+
+El desafío. En todos los departamentos, la mayoría de las zonas rurales no tienen acceso a la red eléctrica, y los generadores son prohibitivos. Las fuentes de agua son inseguras, con letrinas aún en uso, causando problemas de salud generalizados. El acceso a Internet es poco fiable, impidiendo el aprendizaje digital y el trabajo remoto. La inseguridad alimentaria es crónica debido al acceso limitado a productos frescos.
+
+Nuestra solución en tres fases. Fase uno: microrred solar. Esto incluye un panel solar de cinco kilovatios, baterías, una bomba de pozo comunitario, un sistema de purificación de agua y alimentación para un laboratorio informático. Fase dos: jardinería comunitaria. Esto ofrece programas de formación, semillas, herramientas, sistemas de compostaje, captación de agua de lluvia y apoyo para acceso al mercado. Fase tres: centro digital. Esto incluye diez computadoras, Internet satelital, clases de programación, capacitación en trabajo remoto y acceso al mercado global.
+
+El presupuesto asequible totaliza setenta y cinco mil dólares estadounidenses por centro. Detalles: paneles solares y baterías, dieciocho mil. Pozo y purificación de agua, doce mil. Herramientas y semillas de jardín, ocho mil. Computadoras y equipos de Internet, quince mil. Programas de formación y educación, diez mil. Transporte y logística, seis mil. Gestión del proyecto durante doce meses, seis mil. Inversión total: setenta y cinco mil dólares estadounidenses por centro comunitario.
+
+Participe. Invitamos a patrocinadores, inversores y socios a unirse a nosotros para transformar Haití, una comunidad a la vez. Su contribución traerá luz a las familias, proporcionará agua potable, mejorará la seguridad alimentaria, conectará comunidades al mundo y educará a la próxima generación. Estamos abiertos a alianzas a todos los niveles. Ya sea que pueda proporcionar financiamiento, equipos, experiencia o contactos, su apoyo es importante.
+
+Información de contacto. Gesner Deslandes, Ingeniero Jefe en GlobalInternet.py. Correo: deslandes78@gmail.com. Teléfono: (509) 4738-5663. Sitio web: globalinternetsitepy.streamlit.app.
+
+Sea la luz para Haití. Su patrocinio puede transformar comunidades en los 10 departamentos. Contáctenos hoy para iniciar la conversación.
+
+Construido por Gesner Deslandes, Ingeniero Jefe en GlobalInternet.py. Energía solar, impulsado por la comunidad, enfocado al futuro.
+
+Ahora, veamos la barra lateral. La barra lateral contiene el navegador del proyecto con las secciones: Resumen, El desafío, Nuestra solución, Presupuesto y Participe. También enumera los diez departamentos objetivo: Artibonite, Centre, Grand'Anse, Nippes, Nord, Nord-Est, Nord-Ouest, Ouest, Sud y Sud-Est. Haití tiene una población de aproximadamente 11 millones, más de 300 días soleados al año, y está listo para tener impacto en todos los departamentos.
+
+Conclusión. ¿Cómo es posible este proyecto? Es posible porque combinamos tecnologías probadas con conocimientos locales y participación comunitaria. El sol abundante proporciona energía gratuita. La tierra fértil puede producir alimentos. La gente tiene la voluntad y las habilidades para hacerlo funcionar. Con la alianza adecuada y una inversión modesta, podemos convertir esta visión en realidad. Invitamos a todos los patrocinadores a visitar la demo en vivo de este proyecto en el siguiente enlace: https://grand-go-ve-community-resilience-app-project-1-9sggxdea68njywp.streamlit.app/ para ver la propuesta completa y el presupuesto interactivo. Juntos, podemos construir resiliencia, dignidad y esperanza para toda Haití. Gracias por su apoyo.
+"""
+
 # ---------- AUDIO FUNCTIONS ----------
 def split_text_into_chunks(text, max_chars=1500):
     sentences = re.split(r'(?<=[。！？.!?])', text)
@@ -363,6 +456,7 @@ def split_text_into_chunks(text, max_chars=1500):
 async def generate_audio(text, voice):
     try:
         import edge_tts
+        # Try full text first
         try:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
                 output_path = tmp.name
@@ -388,6 +482,7 @@ async def generate_audio(text, voice):
         if not temp_files:
             return None
 
+        # Check ffmpeg availability
         ffmpeg_available = False
         try:
             subprocess.run(["ffmpeg", "-version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
@@ -471,8 +566,8 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Audio buttons
-col_audio1, col_audio2 = st.columns(2)
+# Audio buttons (three now)
+col_audio1, col_audio2, col_audio3 = st.columns(3)
 with col_audio1:
     if st.button(ui['btn_en'], key="en_btn", use_container_width=False):
         with st.spinner("Generating English audio..."):
@@ -490,6 +585,15 @@ with col_audio2:
                 play_audio(audio_files)
             else:
                 st.error("Échec de la génération audio.")
+
+with col_audio3:
+    if st.button(ui['btn_es'], key="es_btn", use_container_width=False):
+        with st.spinner("Generando audio en español..."):
+            audio_files = asyncio.run(generate_audio(SPANISH_SCRIPT, "es-ES-ElviraNeural"))
+            if audio_files:
+                play_audio(audio_files)
+            else:
+                st.error("Fallo al generar audio.")
 
 # ---------- PROJECT OVERVIEW ----------
 st.markdown('<div class="section-box">', unsafe_allow_html=True)
